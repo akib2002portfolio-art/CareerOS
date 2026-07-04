@@ -1,6 +1,11 @@
 import { Sparkles, ArrowRight } from "lucide-react";
+import type { CareerCoachMessage } from "../types/dashboard";
 
-export function CareerCoach() {
+interface CareerCoachProps {
+  coach: CareerCoachMessage;
+}
+
+export function CareerCoach({ coach }: CareerCoachProps) {
   return (
     <div className="relative overflow-hidden rounded-xl border border-zinc-200 bg-gradient-to-br from-[#5B5FEF] to-[#4144C4] p-5 text-white transform transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
       <div className="absolute -right-6 -top-6 h-28 w-28 rounded-full bg-white/10" />
@@ -10,12 +15,10 @@ export function CareerCoach() {
         <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-white/15">
           <Sparkles className="h-3.5 w-3.5" strokeWidth={2} />
         </span>
-        <h2 className="text-sm font-semibold">AI Career Coach</h2>
+        <h2 className="text-sm font-semibold">{coach.title}</h2>
       </div>
 
-      <p className="relative mt-3 text-sm leading-relaxed text-white/85">
-        Your Career Score has increased this week thanks to consistent project work. Improve your resume keywords to push your ATS Match above <span className="font-medium text-white">90%</span>.
-      </p>
+      <p className="relative mt-3 text-sm leading-relaxed text-white/85">{coach.message}</p>
 
       <button
         type="button"

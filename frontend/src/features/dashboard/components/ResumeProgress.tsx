@@ -1,50 +1,22 @@
-import { Check, ArrowRight } from "lucide-react";
-import type { ResumeSection } from "../types/types";
+import { ArrowRight } from "lucide-react";
+import type { ResumeHealth } from "../types/dashboard";
 
-const SECTIONS: ResumeSection[] = [
-  { id: "1", label: "Contact info", complete: true },
-  { id: "2", label: "Summary", complete: true },
-  { id: "3", label: "Experience", complete: true },
-  { id: "4", label: "Skills", complete: true },
-  { id: "5", label: "Projects", complete: false },
-  { id: "6", label: "Education", complete: false },
-];
+interface ResumeProgressProps {
+  resumeHealth: ResumeHealth;
+}
 
-export function ResumeProgress() {
-  const completed = SECTIONS.filter((s) => s.complete).length;
-  const percent = Math.round((completed / SECTIONS.length) * 100);
-
+export function ResumeProgress({ resumeHealth }: ResumeProgressProps) {
   return (
     <div className="rounded-xl border border-zinc-200 bg-white p-5 transform transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
       <div className="flex items-center justify-between">
         <h2 className="text-sm font-semibold text-zinc-900">Resume Health</h2>
-        <span className="font-mono text-xs font-medium text-[#5B5FEF]">{percent}%</span>
+        <span className="font-mono text-xs font-medium text-[#5B5FEF]">{resumeHealth.score}%</span>
       </div>
 
-      <div className="mt-4 flex gap-1">
-        {SECTIONS.map((section) => (
-          <span
-            key={section.id}
-            title={section.label}
-            className={`h-1.5 flex-1 rounded-full ${section.complete ? "bg-[#5B5FEF]" : "bg-zinc-150 bg-zinc-100"}`}
-          />
-        ))}
+      <div className="mt-4 rounded-lg bg-zinc-50 p-3">
+        <p className="text-sm font-medium text-zinc-700">{resumeHealth.title}</p>
+        <p className="mt-1 text-sm text-zinc-500">{resumeHealth.description}</p>
       </div>
-
-      <ul className="mt-4 flex flex-col gap-2">
-        {SECTIONS.map((section) => (
-          <li key={section.id} className="flex items-center gap-2 text-sm">
-            <span
-              className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full ${
-                section.complete ? "bg-[#5B5FEF] text-white" : "border border-zinc-300 text-transparent"
-              }`}
-            >
-              <Check className="h-2.5 w-2.5" strokeWidth={3} />
-            </span>
-            <span className={section.complete ? "text-zinc-600" : "text-zinc-400"}>{section.label}</span>
-          </li>
-        ))}
-      </ul>
 
       <button
         type="button"

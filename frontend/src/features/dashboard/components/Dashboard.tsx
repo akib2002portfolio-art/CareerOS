@@ -6,6 +6,8 @@ import { ResumeProgress } from "./ResumeProgress";
 import { CareerCoach } from "./CareerCoach";
 import { WeeklyGoals } from "./WeeklyGoals";
 import { RecentActivity } from "./RecentActivity";
+import CareerHealthCard from "./CareerHealthCard";
+import { careerHealthChecks } from "../data/careerHealthData";
 
 export function Dashboard() {
   const { dashboard, loading } = useDashboard();
@@ -46,6 +48,7 @@ export function Dashboard() {
           <div className="flex flex-col gap-6">
             <CareerCoach coach={dashboard.coach} />
             <ResumeProgress resumeHealth={dashboard.resumeHealth} />
+            <CareerHealthCard checks={careerHealthChecks} />
             <WeeklyGoals goals={dashboard.weeklyGoals} />
           </div>
         </section>

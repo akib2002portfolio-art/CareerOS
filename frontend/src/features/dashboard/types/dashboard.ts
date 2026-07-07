@@ -1,4 +1,7 @@
+// src/features/dashboard/types/dashboard.ts
+
 import type { LucideIcon } from "lucide-react";
+import type { CareerHealthResult } from "./careerHealth";
 
 export interface StatItem {
   id: string;
@@ -40,11 +43,37 @@ export interface RecentActivityItem {
   timestamp: string;
 }
 
-export interface DashboardData {
+/**
+ * Root dashboard model.
+ * This is the single source of truth for everything rendered
+ * on the Dashboard page.
+ */
+export interface Dashboard {
+  // Existing dashboard widgets
   stats: StatItem[];
   focusTasks: FocusTask[];
   resumeHealth: ResumeHealth;
   coach: CareerCoachMessage;
   weeklyGoals: WeeklyGoal[];
   recentActivities: RecentActivityItem[];
+
+  // Sprint 6
+  careerHealth: CareerHealthResult;
+
+  // Future widgets
+  // github?: GitHubActivity;
+  // portfolio?: PortfolioOverview;
+  // certificates?: CertificateSummary;
+  // jobApplications?: JobApplicationSummary;
+  // aiCoach?: AICoachData;
 }
+
+/**
+ * Generic helper types for future dashboard utilities.
+ */
+export type DashboardWidgetKey = keyof Dashboard;
+
+export type DashboardWidgetData<K extends DashboardWidgetKey> =
+  Dashboard[K];
+
+export type PartialDashboard = Partial<Dashboard>;

@@ -1,8 +1,15 @@
 import { Calendar, FileText, FolderGit2, Target } from "lucide-react";
 
-import type { DashboardData } from "../types/dashboard";
+import type { Dashboard } from "../types/dashboard";
 
-export const mockDashboard: DashboardData = {
+/**
+ * Static dashboard data.
+ *
+ * NOTE:
+ * `careerHealth` is intentionally omitted because it is computed by
+ * CareerHealthService inside DashboardService.
+ */
+export const mockDashboard: Omit<Dashboard, "careerHealth"> = {
   stats: [
     {
       id: "career-score",

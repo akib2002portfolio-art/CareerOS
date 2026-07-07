@@ -1,4 +1,3 @@
-import { useDashboard } from "../hooks/useDashboard";
 import { DashboardHeader } from "./DashboardHeader";
 import { StatsCard } from "./StatsCard";
 import { TodaysFocus } from "./TodaysFocus";
@@ -7,27 +6,13 @@ import { CareerCoach } from "./CareerCoach";
 import { WeeklyGoals } from "./WeeklyGoals";
 import { RecentActivity } from "./RecentActivity";
 import CareerHealthCard from "./CareerHealthCard";
-import { careerHealthChecks } from "../data/careerHealthData";
+import type { Dashboard } from "../types/dashboard";
 
-export function Dashboard() {
-  const { dashboard, loading } = useDashboard();
+export interface DashboardProps {
+  dashboard: Dashboard;
+}
 
-  if (loading) {
-    return (
-      <div className="flex h-[60vh] items-center justify-center">
-        <p className="text-zinc-500">Loading dashboard...</p>
-      </div>
-    );
-  }
-
-  if (!dashboard) {
-    return (
-      <div className="flex h-[60vh] items-center justify-center">
-        <p className="text-red-500">Failed to load dashboard.</p>
-      </div>
-    );
-  }
-
+export function Dashboard({ dashboard }: DashboardProps) {
   return (
     <div className="min-h-screen bg-zinc-50">
       <div className="mx-auto flex max-w-[1600px] flex-col gap-8 px-4 py-6 sm:px-6 lg:px-8">
@@ -48,7 +33,7 @@ export function Dashboard() {
           <div className="flex flex-col gap-6">
             <CareerCoach coach={dashboard.coach} />
             <ResumeProgress resumeHealth={dashboard.resumeHealth} />
-            <CareerHealthCard checks={careerHealthChecks} />
+            <CareerHealthCard careerHealth={dashboard.careerHealth} />
             <WeeklyGoals goals={dashboard.weeklyGoals} />
           </div>
         </section>

@@ -1,41 +1,20 @@
-import type { CareerHealthCheck } from "../types/careerHealth";
-import { useCareerHealth } from "../hooks/useCareerHealth";
+import type { CareerHealthResult } from "../types/careerHealth";
 import CircularScore from "./CircularScore";
 import ProgressBar from "./ProgressBar";
-import CardSkeleton from "./CardSkeleton";
 
 export interface CareerHealthCardProps {
-  checks: CareerHealthCheck[];
+  careerHealth: CareerHealthResult;
 }
 
 /**
- * Pure composition component. All calculation lives in
- * careerHealthService (via useCareerHealth); this component only
- * decides which visual state to render and passes already-computed
- * data down to CircularScore / ProgressBar.
+ * Pure presentational component. It receives already-computed
+ * career health data and renders the dashboard card.
  */
-export default function CareerHealthCard({ checks }: CareerHealthCardProps) {
-  const { data, loading, error } = useCareerHealth(checks);
-
-  if (loading) {
-    return <CardSkeleton />;
-  }
-
-  if (error || !data) {
-    return (
-      <div className="w-full max-w-2xl rounded-2xl bg-white p-6 shadow-sm ring-1 ring-zinc-100 sm:p-8">
-        <h2 className="mb-2 flex items-center gap-2 text-lg font-semibold text-zinc-900">
-          <span aria-hidden="true">💚</span> Career Health
-        </h2>
-        <p className="text-sm text-zinc-500">
-          {error ?? "We couldn't load your career health data right now."}
-        </p>
-      </div>
-    );
-  }
-
+export default function CareerHealthCard({
+  careerHealth,
+}: CareerHealthCardProps) {
   const { score, maxScore, status, strengths, improvements, recommendation } =
-    data;
+    careerHealth;
 
   return (
     <div className="w-full max-w-2xl rounded-2xl bg-white p-6 shadow-sm ring-1 ring-zinc-100 sm:p-8">

@@ -1,12 +1,25 @@
 import { mockDashboard } from "../data/mockDashboard";
-import type { DashboardData } from "../types/dashboard";
+import { careerHealthChecks } from "../data/careerHealthData";
+
+import type { Dashboard } from "../types/dashboard";
+
+import { careerHealthService } from "./careerHealthService";
 
 export class DashboardService {
-  async getDashboardData(): Promise<DashboardData> {
-    // Future:
-    // Fetch data from Supabase API
+  /**
+   * Returns the complete Dashboard.
+   *
+   * Currently composes data from mock sources.
+   * Later this method will fetch everything from Supabase.
+   */
+  async getDashboard(): Promise<Dashboard> {
+    const careerHealth =
+      careerHealthService.calculateCareerHealth(careerHealthChecks);
 
-    return Promise.resolve(mockDashboard);
+    return {
+      ...mockDashboard,
+      careerHealth,
+    };
   }
 }
 

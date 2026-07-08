@@ -1,15 +1,12 @@
-import type { AuthUser } from "../types/auth";
+import { useContext } from "react";
+import { AuthContext } from "../providers/AuthProvider";
 
-export interface UseAuthResult {
-  user: AuthUser | null;
-  loading: boolean;
-  error: string | null;
-}
+export function useAuth() {
+  const context = useContext(AuthContext);
 
-export function useAuth(): UseAuthResult {
-  return {
-    user: null,
-    loading: false,
-    error: null,
-  };
+  if (!context) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+
+  return context;
 }

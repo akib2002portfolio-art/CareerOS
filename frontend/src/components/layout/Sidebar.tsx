@@ -10,6 +10,7 @@ import {
  Archive,
   User,
 } from "lucide-react";
+import { LogoutButton } from "../../features/auth/components/LogoutButton";
 
 interface NavItem {
   label: string;
@@ -119,7 +120,7 @@ export default function Sidebar() {
       </nav>
 
       {/* Footer */}
-      <div className="border-t border-zinc-200 p-4">
+      <div className="border-t border-zinc-200 p-4 space-y-3">
         <button className="flex w-full items-center gap-3 rounded-xl p-3 transition-all duration-200 hover:bg-zinc-100">
           <div className="flex h-11 w-11 items-center justify-center rounded-full bg-indigo-100">
             <User className="h-5 w-5 text-indigo-600" />
@@ -137,6 +138,8 @@ export default function Sidebar() {
 
           <span className="text-zinc-400">›</span>
         </button>
+
+        <LogoutButton />
       </div>
     </aside>
   );

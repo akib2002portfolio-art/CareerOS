@@ -1,7 +1,7 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 
 import MainLayout from "@/components/layout/MainLayout";
-
+import { ProfessionalIdentityPage } from "@/features/professional-identity";
 import { DashboardPage } from "@/pages/DashboardPage";
 import { ResumePage } from "@/pages/ResumePage";
 import { ProjectsPage } from "@/pages/ProjectsPage";
@@ -20,7 +20,10 @@ const router = createBrowserRouter([
   path: "/",
   element: <Navigate to="/login" replace />,
 },
-  
+  {
+  path: "/professional-identity",
+  element: <ProfessionalIdentityPage />,
+  },
   {
     path: "/login",
     element: <LoginPage />,
